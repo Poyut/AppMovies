@@ -46,7 +46,6 @@ namespace AppMovies
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            //ISSUE if movie title is not perfectly writed
             try
             {
                 await LoadMovieData(searchTxt.Text,searchYear.Text);
@@ -67,10 +66,12 @@ namespace AppMovies
             switch (position)
             {
                 case 1:
-                    searchTxt.Text = "";
+                    if(searchTxt.Text == "Movie title...")
+                        searchTxt.Text = "";
                     break;
                 case 2:
-                    searchYear.Text = "";
+                    if (searchYear.Text == "Movie year...")
+                        searchYear.Text = "";
                     break;
             }
         }
@@ -114,14 +115,28 @@ namespace AppMovies
         {
             if(e.Key == Key.Return)
             {
-                await LoadMovieData(searchTxt.Text,searchYear.Text);
+                try
+                {
+                    await LoadMovieData(searchTxt.Text, searchYear.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("There is an error in the movie title or in the released year");
+                }
             }
         }
         private async void searchYear_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                await LoadMovieData(searchTxt.Text, searchYear.Text);
+                try
+                {
+                    await LoadMovieData(searchTxt.Text, searchYear.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("There is an error in the movie title or in the released year");
+                }
             }
         }
     }
