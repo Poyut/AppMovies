@@ -17,6 +17,7 @@ namespace AppMovies
             {
                 if (response.IsSuccessStatusCode)
                 {
+                    //Console.WriteLine(response);
                     MovieModel movie = await response.Content.ReadAsAsync<MovieModel>();
                     return movie;
                 }

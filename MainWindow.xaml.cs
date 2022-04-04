@@ -47,7 +47,14 @@ namespace AppMovies
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             //ISSUE if movie title is not perfectly writed
-            await LoadMovieData(searchTxt.Text,searchYear.Text);
+            try
+            {
+                await LoadMovieData(searchTxt.Text,searchYear.Text);
+            }
+            catch
+            {
+                MessageBox.Show("There is an error in the movie title or in the released year");
+            }
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
