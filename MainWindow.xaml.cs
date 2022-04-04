@@ -90,7 +90,7 @@ namespace AppMovies
 
             }
         }
-        //---------- EVENT HANDLER ----------//
+        //---------- EVENTS HANDLERS ----------//
         private void searchTxt_GotFocus(object sender, RoutedEventArgs e)
         {
             RemoveText(1);
