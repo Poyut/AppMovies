@@ -66,17 +66,31 @@ namespace AppMovies
 
         public void RemoveText(int position)
         {
-            //if (searchTxt.Text == "Movie title...")
-            if(position == 1)
-                searchTxt.Text = "";
-            if (position == 2)
-                searchYear.Text = "";
+            switch (position)
+            {
+                case 1:
+                    searchTxt.Text = "";
+                    break;
+                case 2:
+                    searchYear.Text = "";
+                    break;
+            }
         }
 
         public void AddText(int position)
         {
-            if (string.IsNullOrWhiteSpace(searchTxt.Text))
-                searchTxt.Text = "Movie title...";
+            switch(position)
+            {
+                case 1:
+                    if (string.IsNullOrWhiteSpace(searchTxt.Text))
+                        searchTxt.Text = "Movie title...";
+                    break;
+                case 2:
+                    if (string.IsNullOrWhiteSpace(searchYear.Text))
+                        searchYear.Text = "Movie year...";
+                    break;
+
+            }
         }
         private void searchTxt_GotFocus(object sender, RoutedEventArgs e)
         {
