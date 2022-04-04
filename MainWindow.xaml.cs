@@ -33,6 +33,7 @@ namespace AppMovies
 
             var movie = await MovieProcessor.LoadMovie(movieTitle,movieYear);
 
+            // Replace all appropriate textbox text with the right infos
             var uriSource = new Uri(movie.Poster, UriKind.Absolute);
             moviePoster.Source = new BitmapImage(uriSource);
             titleTxt.Text = movie.Title;
@@ -41,7 +42,6 @@ namespace AppMovies
             awardsTxt.Text = movie.Awards;
             metascoreTxt.Text = (movie.Metascore.ToString()+"/100");
             boxOfficeTxt.Text = movie.BoxOffice;
-
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -55,15 +55,6 @@ namespace AppMovies
             await LoadMovieData("apocalypse+now","1979");
         }
 
-        private async void searchTxt_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Return)
-            {
-                await LoadMovieData(searchTxt.Text,searchYear.Text);
-            }
-        }
-
-
         public void RemoveText(int position)
         {
             switch (position)
@@ -76,7 +67,6 @@ namespace AppMovies
                     break;
             }
         }
-
         public void AddText(int position)
         {
             switch(position)
@@ -92,6 +82,7 @@ namespace AppMovies
 
             }
         }
+        //---------- EVENT HANDLER ----------//
         private void searchTxt_GotFocus(object sender, RoutedEventArgs e)
         {
             RemoveText(1);
@@ -110,6 +101,21 @@ namespace AppMovies
         private void searchYear_LostFocus(object sender, RoutedEventArgs e)
         {
             AddText(2);
+        }
+
+        private async void searchTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Return)
+            {
+                await LoadMovieData(searchTxt.Text,searchYear.Text);
+            }
+        }
+        private async void searchYear_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                await LoadMovieData(searchTxt.Text, searchYear.Text);
+            }
         }
     }
 }
