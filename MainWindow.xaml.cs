@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Azure.Cosmos;
+using System.Net;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AppMovies
 {
@@ -20,6 +13,13 @@ namespace AppMovies
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string EndpointUrl = "https://appmovies.documents.azure.com:443/";
+        private const string AuthorizationKey = "UEnvTs9yOBCpx03MVQAub60FSTcn0dJhsaJKP2eb2kVeVSvNADP7dxgtgBC9GGtB0OQeh3wIvE6rUd5pQ4DKJQ==";
+        private const string DatabaseId = "ListMoviesUser";
+        private const string ContainerId = "Éléments";
+        // OPEN CONNEXION (I don't know if it's ok like this, maybe the connection stay open until the program stop and it's a vulnerability)
+        CosmosClient cosmosClient = new CosmosClient(EndpointUrl, AuthorizationKey);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -137,6 +137,50 @@ namespace AppMovies
                 {
                     MessageBox.Show("There is an error in the movie title or in the released year");
                 }
+            }
+        }
+        private async void addToListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await AddItemsToContainerAsync(cosmosClient);
+            }
+            catch(CosmosException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+
+        /// <summary>
+        /// Add Family items to the container
+        /// </summary>
+        private async Task AddItemsToContainerAsync(CosmosClient cosmosClient)
+        {
+            // Create a movie object
+            Movie movie = new Movie
+            {
+                id = "45",
+                Title = titleTxt.Text,
+                Rate = "4,5",
+                Description = "loved it",
+            };
+
+            Container container = cosmosClient.GetContainer(MainWindow.DatabaseId, MainWindow.ContainerId);
+            Console.WriteLine(movie);
+            try
+            {
+                // Read the item to see if it exists.  
+                ItemResponse<Movie> MovieListResponse = await container.ReadItemAsync<Movie>(movie.id, new PartitionKey(movie.id));
+                //Console.WriteLine("Item in database with id: {0} already exists\n", MovieListResponse.Value.Id);
+            }
+            catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+            {
+                // Create an item in the container representing the Andersen family. Note we provide the value of the partition key for this item, which is "Andersen"
+                ItemResponse<Movie> MovieListResponse = await container.CreateItemAsync<Movie>(movie, new PartitionKey(movie.id));
+
+                // Note that after creating the item, we can access the body of the item with the Resource property off the ItemResponse.
+                //Console.WriteLine("Created item in database with id: {0}\n", andersenFamilyResponse.Value.Id);
             }
         }
     }

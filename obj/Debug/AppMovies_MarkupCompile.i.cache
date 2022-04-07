@@ -1,7 +1,7 @@
 ﻿AppMovies
 
 
-winexe
+exe
 C#
 .cs
 D:\Dev\AppMovies\AppMovies\obj\Debug\
@@ -12,8 +12,8 @@ DEBUG;TRACE
 D:\Dev\AppMovies\AppMovies\App.xaml
 11151548125
 
-9-1391834755
-151938492700
+10-209557546
+1551689616626
 MainWindow.xaml;
 
 True

@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="cinema_background.jpg"/>
         </Grid.Background>
-        <Button x:Name="SearchBtn" Content="Search" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="searchBtn" Content="Search" HorizontalAlignment="Left" Margin="319,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <TextBox x:Name="searchTxt" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Movie title..." VerticalAlignment="Top" Width="179" KeyDown="searchTxt_KeyDown" GotFocus="searchTxt_GotFocus" LostFocus="searchTxt_LostFocus"/>
         <Image x:Name="moviePoster" HorizontalAlignment="Left" Height="371" Margin="10,38,0,0" VerticalAlignment="Top" Width="279"/>
         <TextBox x:Name="titleTxt" HorizontalAlignment="Left" Height="23" Margin="419,80,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="363"/>
@@ -26,6 +26,7 @@
         <Label Content="Metascore" HorizontalAlignment="Left" Margin="341,228,0,0" VerticalAlignment="Top"/>
         <Label Content="Domestic Box Office" HorizontalAlignment="Left" Margin="289,259,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="searchYear" HorizontalAlignment="Left" Height="23" Margin="194,10,0,0" TextWrapping="Wrap" Text="Movie year..." VerticalAlignment="Top" Width="120" GotFocus="searchYear_GotFocus" LostFocus="searchYear_LostFocus" KeyDown="searchYear_KeyDown"/>
+        <Button x:Name="addToListBtn" Content="Add to my list" HorizontalAlignment="Left" Margin="399,10,0,0" VerticalAlignment="Top" Width="90" Click="addToListBtn_Click"/>
 
     </Grid>
 </Window>
