@@ -12,7 +12,7 @@ namespace AppMovies
     {
         [JsonPropertyName("id")]
         public string id { get; set; }
-        public string Title { get; set; }
+        public string title { get; set; }
         public string Rate { get; set; }
         public string Description { get; set; }
         public override string ToString()

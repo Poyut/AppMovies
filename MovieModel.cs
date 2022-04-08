@@ -8,6 +8,7 @@ namespace AppMovies
 {
     public class MovieModel
     {
+        public string imdbID { get; set; }
         public string Title { get; set; }
         public string Released { get; set; }
         public string Director { get; set; }
